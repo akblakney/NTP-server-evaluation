@@ -89,10 +89,10 @@ $\hat{b} = - \text{intercept}$.
 
 
 \section{Evaluating NTP Servers}
-Once an estimate of the constants $D$ and $b$, we obtain the true time $t$ from our system
-time by correcting for the system clock's drift, with $t = 2$
-
-
+Once we have estimates of $D$ and $b$, we can obtain an estimate of the true time $t$, which is
+unobservable, with $\hat{t_i} = (S(t_i) -\hat{b}) / {\hat{D}}$. In contrast to $\text{NTP}(t)$,
+$\hat{t_i}$ does not require us to query a NTP server for time, and provides an estimate of $t$
+based purely on the system clock's time.
 
 
 \pagebreak

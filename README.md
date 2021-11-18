@@ -14,4 +14,7 @@ In order to record these metrics reliably, we need to take many measurements of 
 But this strategy introduces another complication: if we were to do many queries in a short amount of time, the servers' offsets from our system clock could be reliably interpreted in reference to our system time, and used to to calculate their mean, variance, and so on. But since we are instead forced to take measurements over a longer period of time, the drift on our system clock becomes significant enough that the servers' offsets from our system time cannot be attributed to changes in the server times alone; our system clock's drift could be contributing to patterns in the offsets from the server clocks.
 
 To get around this, we will have to measure the drift of our system clock. Due
-to the difficulty of writing mathematical equations in .md files, the full mathematical derivation and model for this task is outlined instead in 
+to the difficulty of writing mathematical equations in .md files, the full mathematical derivation and model for this task is outlined instead [here](model.pdf). Once the drift of the system clock is accounted for, we can estimate UTC(NIST) from our system time. This allows us to estimate the variance associated with NTP distributed times.
+
+## Code
+log_calibration_offsets.py queries NTP servers at consistent intervals over indefinite periods of time, and logs the offsets between the NTP server's time and our system, as well as other information about the NTP queries. This data will be used to estimate the system clock's drift, as explained in the [file](model.pdf) previously referenced.
